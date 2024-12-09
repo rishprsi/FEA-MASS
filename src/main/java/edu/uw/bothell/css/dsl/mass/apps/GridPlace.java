@@ -66,6 +66,6 @@ public class GridPlace extends Place {
         DecompositionSolver solver = new LUDecomposition(matrix).getSolver();
         RealVector solution = solver.solve(vector);
             
-        return solver;
+        return solution.toArray();
     }
 }
