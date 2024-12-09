@@ -25,9 +25,10 @@ public class FEAMass {
         Agents elements = new Agents(2, ElementAgent.class.getName(), null, grid, gridRows);
 
         // Assign one agent per quadrilateral element
+        int[][] position = new int[gridRows][gridCols];
         for (int row = 0; row < gridRows - 1; row++) {
             for (int col = 0; col < gridCols - 1; col++) {
-                int[] position = {row, col};
+                int[row][0] position = 1;//{row, col};
                 elements.callAll(GridPlace.init_, (Object[]) position);
             }
         }
