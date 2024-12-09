@@ -1,0 +1,15 @@
+<nodes>
+  <node>
+    <master>true</master>
+    <hostname>cssmpi16h.uwb.edu</hostname>
+    <masshome>/home/NETID/rishprsi/css534/finalProject/MASS/fea-mass</masshome>
+    <username>rishprsi</username>
+    <privatekey>~/.ssh/id_rsa</privatekey>
+  </node>
+  <node>
+    <hostname>cssmpi17h.uwb.edu</hostname>
+    <masshome>/home/NETID/rishprsi/css534/finalProject/MASS/fea-mass</masshome>
+    <username>rishprsi</username>
+    <privatekey>~/.ssh/id_rsa</privatekey>
+  </node>
+</nodes>
