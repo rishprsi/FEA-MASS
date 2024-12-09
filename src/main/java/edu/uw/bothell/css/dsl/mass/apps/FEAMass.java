@@ -27,10 +27,10 @@ public class FEAMass {
         // Assign one agent per quadrilateral element
         int[][] position = new int[gridRows][gridCols];
         for (int row = 0; row < gridRows - 1; row++) {
-            for (int col = 0; col < gridCols - 1; col++) {
-                position[row][0] = 1;//{row, col};
-                elements.callAll(GridPlace.init_, (Object[]) position);
-            }
+            //for (int col = 0; col < gridCols - 1; col++) {
+            position[row][0] = 1;//{row, col};
+            elements.callAll(GridPlace.init_, (Object[]) position);
+           // }
         }
 
         // Calculate local stiffness matrices and assemble global stiffness matrix
