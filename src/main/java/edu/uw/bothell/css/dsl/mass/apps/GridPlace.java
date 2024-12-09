@@ -2,6 +2,7 @@ import edu.uw.bothell.css.dsl.MASS.Place;
 
 import java.util.HashMap;
 import java.util.Map;
+import org.apache.commons.math3.linear.*;
 
 public class GridPlace extends Place {
     private double[][] globalStiffness;
@@ -58,6 +59,13 @@ public class GridPlace extends Place {
     private double[] solveMatrix(double[][] stiffness, double[] force) {
         // Implement Gaussian elimination or use an external library
         // Placeholder for solving the linear system
-        return new double[force.length];
+        RealMatrix matrix = new Array2DRowRealMatrix(globalStiffness);
+        RealVector vector = new ArrayRealVector(globalForce);
+
+        // Solve the system using LU decomposition
+        DecompositionSolver solver = new LUDecomposition(matrix).getSolver();
+        RealVector solution = solver.solve(vector);
+            
+        return solver;
     }
 }
