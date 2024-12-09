@@ -59,8 +59,8 @@ public class GridPlace extends Place {
     private double[] solveMatrix(double[][] stiffness, double[] force) {
         // Implement Gaussian elimination or use an external library
         // Placeholder for solving the linear system
-        RealMatrix matrix = new Array2DRowRealMatrix(globalStiffness);
-        RealVector vector = new ArrayRealVector(globalForce);
+        RealMatrix matrix = new Array2DRowRealMatrix(stiffness);
+        RealVector vector = new ArrayRealVector(force);
 
         // Solve the system using LU decomposition
         DecompositionSolver solver = new LUDecomposition(matrix).getSolver();
