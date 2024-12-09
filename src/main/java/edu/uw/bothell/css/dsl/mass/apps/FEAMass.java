@@ -28,7 +28,7 @@ public class FEAMass {
         int[][] position = new int[gridRows][gridCols];
         for (int row = 0; row < gridRows - 1; row++) {
             for (int col = 0; col < gridCols - 1; col++) {
-                int[row][0] position = 1;//{row, col};
+                position[row][0] = 1;//{row, col};
                 elements.callAll(GridPlace.init_, (Object[]) position);
             }
         }
