@@ -17,9 +17,12 @@ public class FEAMass {
         int gridCols = 10;
         int totalNodes = gridRows * gridCols;
 
+        
+
         // Initialize places and agents
         Places grid = new Places(1, GridPlace.class.getName(), null, gridRows, gridCols);
-        Agents elements = new Agents(2, ElementAgent.class.getName(), null);
+        //public Agents(int handle, String className, Object argument, Places places, int initPopulation) {
+        Agents elements = new Agents(2, ElementAgent.class.getName(), null, grid, gridRows);
 
         // Assign one agent per quadrilateral element
         for (int row = 0; row < gridRows - 1; row++) {
