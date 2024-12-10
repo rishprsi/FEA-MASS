@@ -16,8 +16,7 @@ public class FEAMass {
         int gridRows = 10;
         int gridCols = 10;
         int totalNodes = gridRows * gridCols;
-
-        
+               
 
         // Initialize places and agents
         Places grid = new Places(1, GridPlace.class.getName(), null, gridRows, gridCols);
@@ -31,13 +30,14 @@ public class FEAMass {
             }
         }
 
-        // Calculate local stiffness matrices and assemble global stiffness matrix
-        elements.callAll(ElementAgent.COMPUTE_LOCAL_STIFFNESS, null);
+       //Move all agents across the X direction
+        
         for (int col = 0; col < gridCols - 1; col++) {
             elements.callAll(GridPlace.init_, (Object[]) position);
+            elements.callAll(ElementAgent.COMPUTE_LOCAL_STIFFNESS, null);
              // Assemble the global stiffness matrix
             elements.callAll(GridPlace.ASSEMBLE_GLOBAL_MATRIX, null);
-            elements.move();
+            elements.callAll(elements.MIGRATE);
         }
            
 
