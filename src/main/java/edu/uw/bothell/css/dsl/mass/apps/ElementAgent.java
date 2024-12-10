@@ -9,12 +9,15 @@ import java.util.Map;
 public class ElementAgent extends Agent {
     private double[][] localStiffnessMatrix;
     private int[] nodeIndices;
+    private int location;
 
     public static final int COMPUTE_LOCAL_STIFFNESS = 0;
+    public static final int MIGRATE = 1;
 
     public ElementAgent(Object argument) {
         // Initialize the agent with default properties
         localStiffnessMatrix = new double[8][8]; // For 4-node quadrilateral
+        location = 0;
     }
 
     @Override
@@ -24,6 +27,8 @@ public class ElementAgent extends Agent {
                 computeLocalStiffnessMatrix();
                 sendContributionToGrid();
                 break;
+            case MIGRATE:
+                return move(o);
         }
         return null;
     }
@@ -55,4 +60,13 @@ public class ElementAgent extends Agent {
         // Send contributions to the grid place
         send(0, contributions);
     }
+    
+    public Object move(Object o) {
+        location++;
+        int xModifier = location;
+        migrate(xModifier);
+        return o;
+
+    }
+    
 }

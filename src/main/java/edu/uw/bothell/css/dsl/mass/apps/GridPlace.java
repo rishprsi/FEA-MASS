@@ -14,6 +14,8 @@ public class GridPlace extends Place {
     public static final int SOLVE_DISPLACEMENT = 1;
     public static final int PRINT_RESULTS = 2;
 
+    public static final int init_ = 0;
+
     public GridPlace(Object argument) {
         // Initialize global stiffness matrix and force vector
         this.totalDoFs = 100; // Example
