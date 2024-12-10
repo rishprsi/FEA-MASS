@@ -32,10 +32,9 @@ public class FEAMass {
         }
 
        //Move all agents across the X direction
-        
+        double[][] localStiffnessMatrices = LocalStiffness.calculateLocalStiffness();
         for (int col = 0; col < gridCols - 1; col++) {
             elements.callAll(GridPlace.init_, (Object[]) position);
-            elements.callAll(ElementAgent.COMPUTE_LOCAL_STIFFNESS, null);
              // Assemble the global stiffness matrix
             elements.callAll(GridPlace.ASSEMBLE_GLOBAL_MATRIX, null);
             elements.callAll(elements.MIGRATE);
