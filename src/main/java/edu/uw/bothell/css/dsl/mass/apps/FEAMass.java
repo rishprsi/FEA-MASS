@@ -36,7 +36,7 @@ public class FEAMass {
         for (int col = 0; col < gridCols - 1; col++) {
             elements.callAll(GridPlace.init_, (Object[]) position);
              // Assemble the global stiffness matrix
-            elements.callAll(GridPlace.ASSEMBLE_GLOBAL_MATRIX, null);
+            elements.callAll(GridPlace.ASSEMBLE_GLOBAL_MATRIX, localStiffnessMatrices);
             elements.callAll(elements.MIGRATE);
             elements.manageAll();
         }
