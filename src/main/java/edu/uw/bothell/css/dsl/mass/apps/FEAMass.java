@@ -21,7 +21,6 @@ public class FEAMass {
 
         // Initialize places and agents
         Places grid = new Places(1, GridPlace.class.getName(), null, gridRows, gridCols);
-        //public Agents(int handle, String className, Object argument, Places places, int initPopulation) {
         Agents elements = new Agents(2, ElementAgent.class.getName(), null, grid, gridRows);
 
         // Assign one agent per quadrilateral element
@@ -29,21 +28,24 @@ public class FEAMass {
         for (int row = 0; row < gridRows - 1; row++) {
             for (int col = 0; col < gridCols - 1; col++) {
                 position[row][0] = (col == 0) ? 1 : -1;//{row, col};
-                elements.callAll(GridPlace.init_, (Object[]) position);
             }
         }
 
         // Calculate local stiffness matrices and assemble global stiffness matrix
         elements.callAll(ElementAgent.COMPUTE_LOCAL_STIFFNESS, null);
-
-        // Assemble the global stiffness matrix
-        grid.callAll(GridPlace.ASSEMBLE_GLOBAL_MATRIX, null);
+        for (int col = 0; col < gridCols - 1; col++) {
+            elements.callAll(GridPlace.init_, (Object[]) position);
+             // Assemble the global stiffness matrix
+            elements.callAll(GridPlace.ASSEMBLE_GLOBAL_MATRIX, null);
+            elements.move();
+        }
+           
 
         // Solve the system (global stiffness * displacement = force)
-        grid.callAll(GridPlace.SOLVE_DISPLACEMENT, null);
+        elements.callAll(GridPlace.SOLVE_DISPLACEMENT, null);
 
         // Print results
-        grid.callAll(GridPlace.PRINT_RESULTS, null);
+        elements.callAll(GridPlace.PRINT_RESULTS, null);
 
         // Finalize MASS
         MASS.finish();
